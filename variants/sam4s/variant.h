@@ -100,6 +100,18 @@ constexpr Pin APIN_W5500_SPI_MISO = 12;
 constexpr Pin APIN_W5500_SPI_SCK = 14;
 constexpr Pin APIN_W5500_SPI_SS0 = 11;
 
+#ifdef PDBOARD
+#define ESP_SPI					SPI
+#define ESP_SPI_INTERFACE_ID	ID_SPI
+#define ESP_SPI_IRQn			SPI_IRQn
+#define ESP_SPI_HANDLER			SPI_Handler
+
+constexpr Pin APIN_ESP_SPI_MOSI = 13;
+constexpr Pin APIN_ESP_SPI_MISO = 12;
+constexpr Pin APIN_ESP_SPI_SCK = 14;
+constexpr Pin APIN_ESP_SPI_SS0 = 11;
+#endif
+
 constexpr Pin APIN_USART_SSPI_MOSI = 6;
 constexpr Pin APIN_USART_SSPI_MISO = 5;
 constexpr Pin APIN_USART_SSPI_SCK = 2;

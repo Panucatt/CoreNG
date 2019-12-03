@@ -36,7 +36,11 @@ extern const PinDescription g_APinDescription[]=
   // Pins 0-25 are PA0-PA25
 
   // 0-2
+#ifndef PDBOARD
   { PIOA, PIO_PA0,				ID_PIOA, PIO_PERIPH_B, PIO_DEFAULT,  PIN_ATTR_DIGITAL,					NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // PS_ON
+#else
+  { PIOA, PIO_PA0,				ID_PIOA, PIO_OUTPUT_0, PIO_DEFAULT,  PIN_ATTR_DIGITAL,					NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // ESP PD/EN
+#endif //PDBOARD
   { PIOA, PIO_PA1,				ID_PIOA, PIO_OUTPUT_0, PIO_DEFAULT,  PIN_ATTR_DIGITAL,                	NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // ENN to all stepper drivers
   { PIOA, PIO_PA2B_SCK0,		ID_PIOA, PIO_PERIPH_B, PIO_DEFAULT,  PIN_ATTR_DIGITAL,					NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // SCK0 (daughter boards, external SD card)
 
@@ -72,11 +76,19 @@ extern const PinDescription g_APinDescription[]=
 
   // 21-23 SPI bus 1
   { PIOA, PIO_PA21A_RXD1,		ID_PIOA, PIO_PERIPH_A, PIO_PULLUP,   PIN_ATTR_ANALOG,					ADC8,   NOT_ON_PWM,  NOT_ON_TIMER }, // Analogue, digital or UART expansion
+#ifndef PDBOARD
   { PIOA, PIO_PA22A_TXD1,		ID_PIOA, PIO_PERIPH_A, PIO_PULLUP,   PIN_ATTR_ANALOG,					ADC9,   NOT_ON_PWM,  NOT_ON_TIMER }, // Analogue, digital or UART expansion
+#else
+  { PIOA, PIO_PA22, 			ID_PIOA, PIO_INPUT,	PIO_DEFAULT,  PIN_ATTR_DIGITAL,					NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // ESP data ready
+#endif //PDBOARD
 #ifdef PCCB
   { PIOA, PIO_PA23A_SCK1,		ID_PIOA, PIO_PERIPH_A, PIO_DEFAULT,  PIN_ATTR_DIGITAL,					NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // USART 1 SCLK (DotStar LED)
 #else
-  { PIOA, PIO_PA23,				ID_PIOA, PIO_INPUT,	   PIO_DEFAULT,  PIN_ATTR_DIGITAL,					NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // W5500 interrupt
+#ifndef PDBOARD
+  { PIOA, PIO_PA23,			ID_PIOA, PIO_INPUT,	   PIO_DEFAULT,  PIN_ATTR_DIGITAL,				NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // W5500 interrupt
+#else
+  { PIOA, PIO_PA23,             	ID_PIOA, PIO_OUTPUT_0, PIO_DEFAULT,  PIN_ATTR_DIGITAL,                  		NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // SAM transfer Ready
+#endif //PDBOARD
 #endif
 
   // 24-25
